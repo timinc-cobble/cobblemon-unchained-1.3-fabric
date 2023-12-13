@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "us.timinc.mc.cobblemon.chaining"
-version = "1.1.3"
+version = "1.3-fabric-1.1.3"
 
 architectury {
     platformSetupLoomIde()
