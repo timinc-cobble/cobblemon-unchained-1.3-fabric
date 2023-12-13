@@ -5,6 +5,7 @@ package us.timinc.mc.cobblemon.chaining.config
 import draylar.omegaconfig.api.Config
 import net.minecraft.world.entity.player.Player
 import us.timinc.mc.cobblemon.chaining.Chaining
+import us.timinc.mc.cobblemon.chaining.util.Util
 import us.timinc.mc.cobblemon.counter.Counter
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -36,17 +37,8 @@ class IvBoostConfig : Config {
     //    @Comment("A list of Pokémon species and form labels to exclusively consider")
     val whitelist = mutableSetOf<String>()
 
-    @Suppress("KotlinConstantConditions")
     fun getPoints(player: Player, species: String): Int {
-        return (Counter.getPlayerKoStreak(
-            player, species
-        ) * koStreakPoints) + (Counter.getPlayerKoCount(
-            player, species
-        ) * koCountPoints) + (Counter.getPlayerCaptureStreak(
-            player, species
-        ) * captureStreakPoints) + (Counter.getPlayerCaptureCount(
-            player, species
-        ) * captureCountPoints)
+        return Util.getPlayerScore(player, species, koStreakPoints, koCountPoints, captureStreakPoints, captureCountPoints)
     }
 
     fun getThreshold(points: Int): Int {

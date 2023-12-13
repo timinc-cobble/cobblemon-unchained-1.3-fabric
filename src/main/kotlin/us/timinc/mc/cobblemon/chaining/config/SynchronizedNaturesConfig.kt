@@ -5,6 +5,7 @@ package us.timinc.mc.cobblemon.chaining.config
 import draylar.omegaconfig.api.Config
 import net.minecraft.world.entity.player.Player
 import us.timinc.mc.cobblemon.chaining.Chaining
+import us.timinc.mc.cobblemon.chaining.util.Util
 import us.timinc.mc.cobblemon.counter.Counter
 
 class SynchronizedNaturesConfig : Config {
@@ -37,17 +38,8 @@ class SynchronizedNaturesConfig : Config {
 
     val percentChance = 0.5;
 
-    @Suppress("KotlinConstantConditions")
     fun getPoints(player: Player, species: String): Int {
-        return (Counter.getPlayerKoStreak(
-            player, species
-        ) * koStreakPoints) + (Counter.getPlayerKoCount(
-            player, species
-        ) * koCountPoints) + (Counter.getPlayerCaptureStreak(
-            player, species
-        ) * captureStreakPoints) + (Counter.getPlayerCaptureCount(
-            player, species
-        ) * captureCountPoints) + 1
+        return Util.getPlayerScore(player, species, koStreakPoints, koCountPoints, captureStreakPoints, captureCountPoints) + 1
     }
 
     override fun getName(): String {

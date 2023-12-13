@@ -1,9 +1,3 @@
-configurations.all {
-    resolutionStrategy.dependencySubstitution {
-        substitute(module("us.timinc.mc.cobblemon.counter:cobblemon-counter:1.0.1")).using(module("curse.maven:cobblemon-counter-900238:4690076"))
-    }
-}
-
 plugins {
     id("java")
     id("dev.architectury.loom") version ("0.12.0-SNAPSHOT")
@@ -35,6 +29,7 @@ repositories {
     maven(url = uri("https://maven.shedaniel.me/"))
     maven(url = "https://cursemaven.com")
     maven(url = "https://maven.draylar.dev/releases")
+    maven(url = "https://api.modrinth.com/maven")
 }
 
 dependencies {
@@ -49,14 +44,7 @@ dependencies {
     modCompileOnly("com.cobblemon:mod:1.3.1+1.19.2-SNAPSHOT")
     modRuntimeOnly("com.cobblemon:fabric:1.3.1+1.19.2-SNAPSHOT")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
-
-    modImplementation("us.timinc.mc.cobblemon.counter:cobblemon-counter:1.0.1")
+    modImplementation("maven.modrinth:cobblemon-counter:1.3-fabric-1.3.0")
     include("dev.draylar.omega-config:omega-config-base:1.3.0+1.19.2")
     modImplementation("dev.draylar.omega-config:omega-config-base:1.3.0+1.19.2")
-}
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
 }
